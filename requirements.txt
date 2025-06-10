@@ -1,0 +1,10 @@
+scikit-learn==1.6.1
+pandas==2.1.4
+pyarrow==16.1.0
+category_encoders==2.6.3
+imbalanced-learn==0.12.3
+pytest
+requests
+google-cloud-storage
+google-cloud-bigquery
+dill
