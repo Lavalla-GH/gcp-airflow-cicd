@@ -11,6 +11,10 @@ from bank_campaign_model_training import (
 )
 import pandas as pd
 
+# suppress warnings
+import warnings
+warnings.filterwarnings('ignore', category=FutureWarning)
+
 @pytest.fixture
 def dummy_data():
     # Prepare dummy data for testing

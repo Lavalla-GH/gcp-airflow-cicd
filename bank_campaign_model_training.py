@@ -6,7 +6,7 @@ import warnings
 warnings.filterwarnings('ignore', category=FutureWarning)
 
 import pandas as pd
-from imblearn.over_sampling import RandomOverSampler
+# from imblearn.over_sampling import RandomOverSampler
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
@@ -88,7 +88,7 @@ def save_model_artifact(model_name, pipeline):
     model_artifact.upload_from_filename(artifact_name) # ⭐ Upload the local model file to GCS
 
 def load_model_artifact(file_name): # ⭐. Not used in this script, but useful for loading models later.
-    blob = bucket.blob("ml-artifacts/" + file_name) # ⭐
+    blob = bucket.blob("bank_campaign_artifact/" + file_name) # ⭐
     blob.download_to_filename(file_name) # ⭐
     return load(file_name) # ⭐
 
@@ -114,8 +114,9 @@ def main():
     df = apply_bucketing(df)
     X, y = preprocess_features(df)
     
-    oversampler = RandomOverSampler(random_state=42)
-    X_resampled, y_resampled = oversampler.fit_resample(X, y)
+    # oversampler = RandomOverSampler(random_state=42)
+    # X_resampled, y_resampled = oversampler.fit_resample(X, y)
+    X_resampled, y_resampled = X, y
     
     X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.2, random_state=42)
     pipeline = train_model(model_name, X_train, y_train)
